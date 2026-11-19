@@ -1,0 +1,143 @@
+erDiagram
+  sg_users ||--o{ sg_sessions : authenticates
+  sg_users ||--o| sg_trainers : has_profile
+  sg_users o|--o| sg_members : member_login
+  sg_trainers o|--o{ sg_members : coaches
+  sg_trainers ||--o{ sg_workout_plans : owns
+  sg_members ||--o{ sg_subscriptions : enrolls
+  sg_packages ||--o{ sg_subscriptions : prices
+  sg_subscriptions ||--o| sg_payments : records
+  sg_members ||--o{ sg_attendance : identifies
+  sg_members ||--o{ sg_assignments : receives
+  sg_workout_plans ||--o{ sg_assignments : assigned_to
+  sg_workout_plans ||--o{ sg_plan_exercises : contains
+  sg_exercises ||--o{ sg_plan_exercises : prescribes
+  sg_equipment o|--o{ sg_exercises : supports
+  sg_equipment ||--o{ sg_maintenance : serviced
+  sg_users {
+    int id PK
+    string name
+    string email UK
+    string passwordHash
+    role role
+    boolean active
+    datetime createdAt
+  }
+  sg_sessions {
+    string tokenHash PK
+    int userId FK
+    datetime expiresAt
+  }
+  sg_login_attempts {
+    string key PK
+    int count
+    datetime windowStart
+  }
+  sg_trainers {
+    int id PK
+    int userId UK, FK
+    string specialty
+    string phone UK
+  }
+  sg_members {
+    int id PK
+    int userId UK, FK
+    string name
+    string email UK
+    string phone UK
+    string goal
+    boolean active
+    datetime joinedAt
+    int trainerId FK
+  }
+  sg_packages {
+    int id PK
+    string name UK
+    decimal price
+    int durationDays
+    boolean active
+  }
+  sg_subscriptions {
+    int id PK
+    int memberId FK
+    int packageId FK
+    datetime startsAt
+    datetime endsAt
+    decimal price
+    subscriptionstatus status
+    string requestKey UK
+    datetime createdAt
+  }
+  sg_payments {
+    int id PK
+    int subscriptionId UK, FK
+    decimal amount
+    string method
+    paymentstatus status
+    datetime paidAt
+    datetime createdAt
+  }
+  sg_attendance {
+    int memberId PK, FK
+    datetime date PK
+    datetime checkIn
+    datetime checkOut
+  }
+  sg_equipment {
+    int id PK
+    string name UK
+    int quantity
+    equipmentstatus status
+    datetime nextService
+  }
+  sg_maintenance {
+    int id PK
+    int equipmentId FK
+    datetime performedAt
+    string description
+    decimal cost
+  }
+  sg_exercises {
+    int id PK
+    string name UK
+    string muscleGroup
+    int equipmentId FK
+    int defaultSets
+    int defaultReps
+  }
+  sg_workout_plans {
+    int id PK
+    string name UK
+    string goal
+    int durationWeeks
+    int trainerId FK
+  }
+  sg_plan_exercises {
+    int planId PK, FK
+    int exerciseId PK, FK
+    int sets
+    int reps
+  }
+  sg_assignments {
+    int memberId PK, FK
+    int planId PK, FK
+    datetime assignedAt
+  }
+  sg_audit {
+    int id PK
+    string entity
+    int entityId
+    string action
+    json details
+    datetime createdAt
+  }
+  sg_outbox {
+    string id PK
+    string type
+    int memberId
+    json metadata
+    datetime createdAt
+    datetime processedAt
+    int attempts
+    string lastError
+  }

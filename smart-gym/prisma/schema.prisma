@@ -1,0 +1,212 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "mysql"
+}
+enum Role {
+  ADMIN
+  TRAINER
+  USER
+}
+enum EquipmentStatus {
+  AVAILABLE
+  MAINTENANCE
+  RETIRED
+}
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+}
+enum PaymentStatus {
+  PENDING
+  PAID
+}
+model User {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(150)
+  email String @unique @db.VarChar(150)
+  passwordHash String @db.VarChar(255)
+  role Role
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  trainer Trainer?
+  member Member?
+  sessions Session[]
+  @@map("sg_users")
+}
+model Session {
+  tokenHash String @id @db.Char(64)
+  userId Int
+  expiresAt DateTime
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([expiresAt])
+  @@map("sg_sessions")
+}
+model LoginAttempt {
+  key String @id @db.Char(64)
+  count Int @default(0)
+  windowStart DateTime @default(now())
+  @@map("sg_login_attempts")
+}
+model Trainer {
+  id Int @id @default(autoincrement())
+  userId Int @unique
+  specialty String @db.VarChar(120)
+  phone String? @unique @db.VarChar(20)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  members Member[]
+  plans WorkoutPlan[]
+  @@map("sg_trainers")
+}
+model Member {
+  id Int @id @default(autoincrement())
+  userId Int? @unique
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name String @db.VarChar(150)
+  email String @unique @db.VarChar(150)
+  phone String? @unique @db.VarChar(20)
+  goal String @default("General fitness") @db.VarChar(200)
+  active Boolean @default(true)
+  joinedAt DateTime @default(now())
+  trainerId Int?
+  trainer Trainer? @relation(fields: [trainerId], references: [id], onDelete: Restrict)
+  subscriptions Subscription[]
+  attendance Attendance[]
+  assignments Assignment[]
+  @@index([trainerId, active])
+  @@index([joinedAt])
+  @@map("sg_members")
+}
+model Package {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(100)
+  price Decimal @db.Decimal(10,2)
+  durationDays Int
+  active Boolean @default(true)
+  subscriptions Subscription[]
+  @@map("sg_packages")
+}
+model Subscription {
+  id Int @id @default(autoincrement())
+  memberId Int
+  packageId Int
+  startsAt DateTime @db.Date
+  endsAt DateTime @db.Date
+  price Decimal @db.Decimal(10,2)
+  status SubscriptionStatus @default(ACTIVE)
+  requestKey String @unique @db.VarChar(64)
+  createdAt DateTime @default(now())
+  member Member @relation(fields: [memberId], references: [id], onDelete: Restrict)
+  package Package @relation(fields: [packageId], references: [id], onDelete: Restrict)
+  payment Payment?
+  @@index([memberId, status, endsAt])
+  @@index([endsAt, status])
+  @@map("sg_subscriptions")
+}
+model Payment {
+  id Int @id @default(autoincrement())
+  subscriptionId Int @unique
+  amount Decimal @db.Decimal(10,2)
+  method String @db.VarChar(20)
+  status PaymentStatus @default(PAID)
+  paidAt DateTime?
+  createdAt DateTime @default(now())
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Restrict)
+  @@index([status, paidAt])
+  @@map("sg_payments")
+}
+model Attendance {
+  memberId Int
+  date DateTime @db.Date
+  checkIn DateTime @default(now())
+  checkOut DateTime?
+  member Member @relation(fields: [memberId], references: [id], onDelete: Restrict)
+  @@id([memberId, date])
+  @@index([date])
+  @@map("sg_attendance")
+}
+model Equipment {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(100)
+  quantity Int @default(1)
+  status EquipmentStatus @default(AVAILABLE)
+  nextService DateTime? @db.Date
+  exercises Exercise[]
+  maintenance Maintenance[]
+  @@index([status, nextService])
+  @@map("sg_equipment")
+}
+model Maintenance {
+  id Int @id @default(autoincrement())
+  equipmentId Int
+  performedAt DateTime @db.Date
+  description String @db.VarChar(500)
+  cost Decimal @db.Decimal(10,2)
+  equipment Equipment @relation(fields: [equipmentId], references: [id], onDelete: Restrict)
+  @@index([equipmentId, performedAt])
+  @@map("sg_maintenance")
+}
+model Exercise {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(100)
+  muscleGroup String @db.VarChar(80)
+  equipmentId Int?
+  defaultSets Int @default(3)
+  defaultReps Int @default(12)
+  equipment Equipment? @relation(fields: [equipmentId], references: [id], onDelete: Restrict)
+  plans PlanExercise[]
+  @@map("sg_exercises")
+}
+model WorkoutPlan {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(100)
+  goal String @db.VarChar(200)
+  durationWeeks Int
+  trainerId Int
+  trainer Trainer @relation(fields: [trainerId], references: [id], onDelete: Restrict)
+  exercises PlanExercise[]
+  assignments Assignment[]
+  @@map("sg_workout_plans")
+}
+model PlanExercise {
+  planId Int
+  exerciseId Int
+  sets Int
+  reps Int
+  plan WorkoutPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+  @@id([planId, exerciseId])
+  @@map("sg_plan_exercises")
+}
+model Assignment {
+  memberId Int
+  planId Int
+  assignedAt DateTime @default(now())
+  member Member @relation(fields: [memberId], references: [id], onDelete: Restrict)
+  plan WorkoutPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
+  @@id([memberId, planId])
+  @@map("sg_assignments")
+}
+model Audit {
+  id Int @id @default(autoincrement())
+  entity String @db.VarChar(30)
+  entityId Int
+  action String @db.VarChar(20)
+  details Json
+  createdAt DateTime @default(now())
+  @@index([entity, entityId, createdAt])
+  @@map("sg_audit")
+}
+model Outbox {
+  id String @id @default(uuid()) @db.VarChar(36)
+  type String @db.VarChar(80)
+  memberId Int?
+  metadata Json
+  createdAt DateTime @default(now())
+  processedAt DateTime?
+  attempts Int @default(0)
+  lastError String? @db.VarChar(200)
+  @@index([processedAt, createdAt])
+  @@map("sg_outbox")
+}

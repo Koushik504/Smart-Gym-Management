@@ -1,0 +1,32 @@
+{
+  "folders": [
+    {
+      "name": "Smart Gym",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "explorer.sortOrder": "type",
+    "explorer.compactFolders": false,
+    "files.exclude": {
+      ".local": true,
+      ".venv": true,
+      "**/__pycache__": true,
+      "**/.env": true,
+      "smart-gym/node_modules": true,
+      "smart-gym/.next": true,
+      "smart-gym/backups": true,
+      "smart-gym/test-results": true,
+      "smart-gym/playwright-report": true,
+      "smart-gym/tmp": true,
+      "**/*.tsbuildinfo": true
+    },
+    "search.exclude": {
+      ".local": true,
+      ".venv": true,
+      "smart-gym/node_modules": true,
+      "smart-gym/.next": true,
+      "smart-gym/backups": true
+    }
+  }
+}

@@ -1,0 +1,182 @@
+﻿{
+    "timestamp":  "2026-11-19T17:59:38.168516+00:00",
+    "source":  {
+                   "host":  "127.0.0.1",
+                   "port":  3308,
+                   "database":  "smart_gym"
+               },
+    "target":  {
+                   "host":  "127.0.0.1",
+                   "port":  3306,
+                   "database":  "smart_gym",
+                   "server":  {
+                                  "port":  3306,
+                                  "version":  "8.0.46",
+                                  "binaryLog":  1,
+                                  "trustCreators":  0
+                              }
+               },
+    "verified":  true,
+    "comparison":  "All table counts and canonical row SHA-256 fingerprints match. JSON columns compare parsed values with canonical object key ordering and numeric representation. View, routine and trigger identities match. App-account reads and routine execution passed.",
+    "snapshot":  {
+                     "tables":  {
+                                    "sg_assignments":  {
+                                                           "rows":  24,
+                                                           "sha256":  "36b08d1bbbdfa4de01b619006145ca1ac094d681f55df77754a1500584c0acd4"
+                                                       },
+                                    "sg_attendance":  {
+                                                          "rows":  150,
+                                                          "sha256":  "9edff779845096d0a3d08b0d4b6d7bdd3af9b694b636cb8dd8d21d62c46c5981"
+                                                      },
+                                    "sg_audit":  {
+                                                     "rows":  24,
+                                                     "sha256":  "af0dc4ef70d0eb9b094a63ca462c081bc40b810c2bdd86771e202eae61982dfc"
+                                                 },
+                                    "sg_equipment":  {
+                                                         "rows":  3,
+                                                         "sha256":  "a19e9eecbb93226fd06691d9cb0af6a549aefa46f746c80e46ec709f386985e6"
+                                                     },
+                                    "sg_exercises":  {
+                                                         "rows":  5,
+                                                         "sha256":  "9425c94b2f6ceef7de84abe5b1a7bec07c27c9da9fcafb4bf3501567fea3bd9b"
+                                                     },
+                                    "sg_login_attempts":  {
+                                                              "rows":  3,
+                                                              "sha256":  "9ab66e2bfcf4bda9698dbba05693550003b4261297d09a61f6db4c962d4bf64b"
+                                                          },
+                                    "sg_maintenance":  {
+                                                           "rows":  1,
+                                                           "sha256":  "a664b0e0c28113703512e769c9225c413f86066afdc43f8797fd174fdae13d1d"
+                                                       },
+                                    "sg_members":  {
+                                                       "rows":  25,
+                                                       "sha256":  "9cd0ca01dcc7a7b063a8099a940b15330f5274573f84bbaa624725f9f9f3a5f8"
+                                                   },
+                                    "sg_migrations":  {
+                                                          "rows":  4,
+                                                          "sha256":  "ef83b68968b3406a451c83d3806123f18289d18041905c1ba74c8b0e9761a60a"
+                                                      },
+                                    "sg_outbox":  {
+                                                      "rows":  24,
+                                                      "sha256":  "8c8b309e9508485a4184a045ed63b31742934fac5eb9b2c4d51f3134f5a8a781"
+                                                  },
+                                    "sg_packages":  {
+                                                        "rows":  3,
+                                                        "sha256":  "5a2a5ddf570f0225b693ec29117d9d51c512b0f20d13d31f518d61c0bdd96469"
+                                                    },
+                                    "sg_payments":  {
+                                                        "rows":  24,
+                                                        "sha256":  "d12a927d7efc4ef1aca9fdfa6be7f237a55e78e70ba004ae36acdd4032983bc4"
+                                                    },
+                                    "sg_plan_exercises":  {
+                                                              "rows":  9,
+                                                              "sha256":  "4ee66f8e9090906eca77a01e761a21a26ebe7ae1699b70e307749d98b5b25791"
+                                                          },
+                                    "sg_sessions":  {
+                                                        "rows":  24,
+                                                        "sha256":  "3f599cbf6ea221119b26134a9483fa723d1b7e19d993ace44998dab32163c6d2"
+                                                    },
+                                    "sg_subscriptions":  {
+                                                             "rows":  24,
+                                                             "sha256":  "815b633ccad9c2b6502917336282f498e9f56b5f815b774d53f1d075e8114bd5"
+                                                         },
+                                    "sg_trainers":  {
+                                                        "rows":  3,
+                                                        "sha256":  "c76d7b4648665d6eec324abd547ce0fb3c9e1de3116c658eb0486f32720dae26"
+                                                    },
+                                    "sg_users":  {
+                                                     "rows":  5,
+                                                     "sha256":  "98b3df1514326ee22ddcd5b9300cc662eeaac502e663f58807e0441c46df82dc"
+                                                 },
+                                    "sg_workout_plans":  {
+                                                             "rows":  3,
+                                                             "sha256":  "45919b4dcf9bb5741b6670f6fb49e6dfd98e082c7dccc2e5036e457b557c65ac"
+                                                         }
+                                },
+                     "views":  [
+                                   "sg_active_memberships",
+                                   "sg_attendance_summary",
+                                   "sg_monthly_revenue",
+                                   "sg_trainer_workload"
+                               ],
+                     "routines":  [
+                                      {
+                                          "ROUTINE_NAME":  "sg_attendance_rate",
+                                          "ROUTINE_TYPE":  "FUNCTION"
+                                      },
+                                      {
+                                          "ROUTINE_NAME":  "sg_is_member_active",
+                                          "ROUTINE_TYPE":  "FUNCTION"
+                                      },
+                                      {
+                                          "ROUTINE_NAME":  "sg_membership_end",
+                                          "ROUTINE_TYPE":  "FUNCTION"
+                                      },
+                                      {
+                                          "ROUTINE_NAME":  "sg_member_summary",
+                                          "ROUTINE_TYPE":  "PROCEDURE"
+                                      },
+                                      {
+                                          "ROUTINE_NAME":  "sg_renew_membership",
+                                          "ROUTINE_TYPE":  "PROCEDURE"
+                                      },
+                                      {
+                                          "ROUTINE_NAME":  "sg_top_attendance",
+                                          "ROUTINE_TYPE":  "PROCEDURE"
+                                      },
+                                      {
+                                          "ROUTINE_NAME":  "sg_trainer_members",
+                                          "ROUTINE_TYPE":  "PROCEDURE"
+                                      }
+                                  ],
+                     "triggers":  [
+                                      {
+                                          "TRIGGER_NAME":  "sg_payment_audit_insert",
+                                          "EVENT_MANIPULATION":  "INSERT",
+                                          "ACTION_TIMING":  "AFTER",
+                                          "EVENT_OBJECT_TABLE":  "sg_payments"
+                                      },
+                                      {
+                                          "TRIGGER_NAME":  "sg_payment_audit_update",
+                                          "EVENT_MANIPULATION":  "UPDATE",
+                                          "ACTION_TIMING":  "AFTER",
+                                          "EVENT_OBJECT_TABLE":  "sg_payments"
+                                      },
+                                      {
+                                          "TRIGGER_NAME":  "sg_payment_validate",
+                                          "EVENT_MANIPULATION":  "INSERT",
+                                          "ACTION_TIMING":  "BEFORE",
+                                          "EVENT_OBJECT_TABLE":  "sg_payments"
+                                      },
+                                      {
+                                          "TRIGGER_NAME":  "sg_payment_validate_update",
+                                          "EVENT_MANIPULATION":  "UPDATE",
+                                          "ACTION_TIMING":  "BEFORE",
+                                          "EVENT_OBJECT_TABLE":  "sg_payments"
+                                      },
+                                      {
+                                          "TRIGGER_NAME":  "sg_subscription_audit",
+                                          "EVENT_MANIPULATION":  "UPDATE",
+                                          "ACTION_TIMING":  "AFTER",
+                                          "EVENT_OBJECT_TABLE":  "sg_subscriptions"
+                                      }
+                                  ]
+                 },
+    "originalGymMembersUnchanged":  5,
+    "credentials":  "Generated database-only app account in private .env; administrator password not stored.",
+    "mongo":  "Existing MongoDB database and member IDs preserved.",
+    "rollback":  "Source on 3308 retained; source.sql and app.env.before in ignored backups/.",
+    "postCutoverChecks":  {
+                              "ApiPassed":  39,
+                              "ApiFailed":  0,
+                              "BrowserPassed":  8,
+                              "BrowserFailed":  0,
+                              "UnitPassed":  13,
+                              "Typecheck":  "passed",
+                              "Lint":  "passed",
+                              "MigrationRepeat":  "all four checksums recognized",
+                              "FinalUsers":  5,
+                              "FinalMembers":  25,
+                              "AppOrigin":  "http://127.0.0.1:3100"
+                          }
+}

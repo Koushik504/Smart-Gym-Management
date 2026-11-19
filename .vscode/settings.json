@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    ".local": true,
+    "__pycache__": true,
+    "smart-gym/.next": true
+  },
+  "search.exclude": {
+    ".local": true,
+    ".venv": true,
+    "smart-gym/node_modules": true,
+    "smart-gym/.next": true,
+    "smart-gym/backups": true
+  }
+}

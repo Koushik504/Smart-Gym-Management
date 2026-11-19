@@ -1,0 +1,149 @@
+{
+  "checkedUtc": "2026-11-19T18:31:07.074Z",
+  "database": "smart_gym",
+  "mysqlPort": 3306,
+  "tableCounts": {
+    "sg_assignments": 24,
+    "sg_attendance": 150,
+    "sg_audit": 24,
+    "sg_equipment": 3,
+    "sg_exercises": 5,
+    "sg_login_attempts": 4,
+    "sg_maintenance": 1,
+    "sg_members": 26,
+    "sg_migrations": 4,
+    "sg_outbox": 25,
+    "sg_packages": 3,
+    "sg_payments": 24,
+    "sg_plan_exercises": 9,
+    "sg_sessions": 27,
+    "sg_subscriptions": 24,
+    "sg_trainers": 3,
+    "sg_users": 6,
+    "sg_workout_plans": 3
+  },
+  "views": [
+    "sg_active_memberships",
+    "sg_attendance_summary",
+    "sg_monthly_revenue",
+    "sg_trainer_workload"
+  ],
+  "triggers": [
+    "sg_payment_audit_insert",
+    "sg_payment_audit_update",
+    "sg_payment_validate",
+    "sg_payment_validate_update",
+    "sg_subscription_audit"
+  ],
+  "routines": [
+    "sg_attendance_rate",
+    "sg_is_member_active",
+    "sg_membership_end",
+    "sg_member_summary",
+    "sg_renew_membership",
+    "sg_top_attendance",
+    "sg_trainer_members"
+  ],
+  "mongoCollections": [
+    {
+      "name": "workout_logs",
+      "count": 72,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "memberId": 1,
+            "date": -1
+          },
+          "name": "memberId_1_date_-1"
+        },
+        {
+          "v": 2,
+          "key": {
+            "date": -1,
+            "status": 1
+          },
+          "name": "date_-1_status_1"
+        }
+      ]
+    },
+    {
+      "name": "member_progress",
+      "count": 36,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "memberId": 1,
+            "date": -1
+          },
+          "name": "memberId_1_date_-1"
+        }
+      ]
+    },
+    {
+      "name": "activity_events",
+      "count": 24,
+      "indexes": [
+        {
+          "v": 2,
+          "key": {
+            "_id": 1
+          },
+          "name": "_id_"
+        },
+        {
+          "v": 2,
+          "key": {
+            "memberId": 1,
+            "timestamp": -1
+          },
+          "name": "memberId_1_timestamp_-1"
+        },
+        {
+          "v": 2,
+          "key": {
+            "type": 1,
+            "timestamp": -1
+          },
+          "name": "type_1_timestamp_-1"
+        }
+      ]
+    }
+  ],
+  "integration": {
+    "passed": 39,
+    "failed": 0,
+    "timestamp": "2026-11-19T18:02:04.368Z"
+  },
+  "browser": {
+    "startTime": "2026-11-19T18:03:18.888Z",
+    "duration": 68097.61099999999,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "studentActions": [
+    "Approved two-member team and actual names",
+    "Section title uniqueness",
+    "Real individual work and Git history",
+    "Course originality/attribution review",
+    "Authorized own-repository publication",
+    "Live presentation"
+  ]
+}

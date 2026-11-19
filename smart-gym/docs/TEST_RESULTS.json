@@ -1,0 +1,164 @@
+{
+  "timestamp": "2026-11-19T18:02:04.368Z",
+  "origin": "http://127.0.0.1:3100",
+  "passed": 39,
+  "failed": 0,
+  "results": [
+    {
+      "name": "MySQL 8 connectivity and MongoDB ping",
+      "passed": true
+    },
+    {
+      "name": "Anonymous API access denied",
+      "passed": true
+    },
+    {
+      "name": "Origin protection rejects credential mutations",
+      "passed": true
+    },
+    {
+      "name": "Authentication rejects incorrect passwords",
+      "passed": true
+    },
+    {
+      "name": "Admin and trainer login issue opaque sessions",
+      "passed": true
+    },
+    {
+      "name": "Trainer cannot access finances or create members",
+      "passed": true
+    },
+    {
+      "name": "Dedicated read routes, health and auth/me use live databases",
+      "passed": true
+    },
+    {
+      "name": "Admin database APIs reject anonymous and trainer access",
+      "passed": true
+    },
+    {
+      "name": "All SQL views and CTE analytics execute through admin routes",
+      "passed": true
+    },
+    {
+      "name": "Database APIs validate operation names, ranges, IDs and JSON",
+      "passed": true
+    },
+    {
+      "name": "Create member, edit fields and assign trainer persist",
+      "passed": true
+    },
+    {
+      "name": "Trainer access is restricted to assigned members",
+      "passed": true
+    },
+    {
+      "name": "Regular member login is scoped to own records and cannot manage the gym",
+      "passed": true
+    },
+    {
+      "name": "Stored procedure and functions return the persisted member state",
+      "passed": true
+    },
+    {
+      "name": "Server validation and unique constraints reject invalid members",
+      "passed": true
+    },
+    {
+      "name": "Package creation and database CHECK enforcement",
+      "passed": true
+    },
+    {
+      "name": "Renewal procedure creates pending payment and is idempotent",
+      "passed": true
+    },
+    {
+      "name": "Pending membership cannot check in; paid settlement unlocks check-in",
+      "passed": true
+    },
+    {
+      "name": "Duplicate attendance and inverted check-out are rejected",
+      "passed": true
+    },
+    {
+      "name": "SQL attendance functions and leaderboard reflect a real check-in",
+      "passed": true
+    },
+    {
+      "name": "Concurrent renewals serialize into non-overlapping periods",
+      "passed": true
+    },
+    {
+      "name": "Procedure rollback leaves no subscription or outbox on payment failure",
+      "passed": true
+    },
+    {
+      "name": "Interactive transaction rolls back subscription when trigger rejects payment",
+      "passed": true
+    },
+    {
+      "name": "SQL views, triggers and foreign keys operate on real records",
+      "passed": true
+    },
+    {
+      "name": "Equipment inventory and maintenance transaction persist",
+      "passed": true
+    },
+    {
+      "name": "Exercise catalog, plan creation and trainer assignment",
+      "passed": true
+    },
+    {
+      "name": "MongoDB workout CRUD, filters and aggregation",
+      "passed": true
+    },
+    {
+      "name": "MongoDB progress CRUD and document validation",
+      "passed": true
+    },
+    {
+      "name": "Members read own financial history and assigned plans, and edit only own logs",
+      "passed": true
+    },
+    {
+      "name": "Dashboard metrics, search and date filters use persisted records",
+      "passed": true
+    },
+    {
+      "name": "Outbox retries safely and events are not duplicated",
+      "passed": true
+    },
+    {
+      "name": "Safe disposable SQL CREATE ALTER INSERT UPDATE DELETE DROP demonstration",
+      "passed": true
+    },
+    {
+      "name": "MongoDB deletes and member deactivation preserve relational history",
+      "passed": true
+    },
+    {
+      "name": "Trainer financial fields are excluded and injection-shaped filters are rejected",
+      "passed": true
+    },
+    {
+      "name": "Trainer creation, profile editing, password hashing and session invalidation",
+      "passed": true
+    },
+    {
+      "name": "Catalog updates persist without repricing historical subscriptions",
+      "passed": true
+    },
+    {
+      "name": "Reference-safe plan/exercise deletion and inventory retirement",
+      "passed": true
+    },
+    {
+      "name": "MongoDB outage leaves a durable pending outbox event for later retry",
+      "passed": true
+    },
+    {
+      "name": "Logout invalidates the server session",
+      "passed": true
+    }
+  ]
+}
